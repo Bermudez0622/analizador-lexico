@@ -3,7 +3,9 @@ package com.udistrital.lexer.tokens;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Operators {
 
@@ -14,6 +16,8 @@ public class Operators {
     protected static final Map<String, Integer> logical = new HashMap<>();
     protected static final Map<String, Integer> special = new HashMap<>();
     protected static final Map<String, Integer> delimiters = new LinkedHashMap<>();
+
+    protected static final Set<String> operators = new LinkedHashSet<>();
 
     static {
         arithmetics.put("+", 0);
@@ -45,6 +49,24 @@ public class Operators {
         delimiters.put(">", 0);
         delimiters.put("\"", 0);
         delimiters.put("'", 0);
+
+        operators.addAll(arithmetics.keySet());
+        operators.addAll(relational.keySet());
+        operators.addAll(logical.keySet());
+        operators.addAll(special.keySet());
+        operators.addAll(delimiters.keySet());
+    }
+
+    public static boolean containsOperator(String line) {
+
+        for(String character : line.split("")) {
+            if(operators.contains(character)) {
+                return true;
+            }
+        }
+
+        return false;
+
     }
 
     public static boolean isOperator(String token) {

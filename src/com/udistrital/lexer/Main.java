@@ -4,6 +4,9 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+
+import com.udistrital.lexer.reviewer.Reviewer;
 
 public class Main {
 
@@ -24,11 +27,21 @@ public class Main {
             );
 
             while(reader.hasNextLine()) {
+                String line = reader.nextLine();
                 log.log(
                     Level.INFO,
                     "{0}",
-                    reader.nextLine()
+                    line
                 );
+
+                Matcher math = Reviewer.include.matcher(line);
+
+                log.log(
+                    Level.INFO,
+                    "{0}",
+                    math.matches()
+                );
+
             }
 
             log.log(
