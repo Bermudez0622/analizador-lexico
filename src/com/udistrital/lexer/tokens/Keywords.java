@@ -19,11 +19,12 @@ public class Keywords {
         typeDefinitions.put("auto", 0);
         typeDefinitions.put("bool", 0);
         typeDefinitions.put("char", 0);
+        typeDefinitions.put("class", 0);
         typeDefinitions.put("double", 0);
-        typeDefinitions.put("const", 0);
         typeDefinitions.put("float", 0);
         typeDefinitions.put("int", 0);
         typeDefinitions.put("long", 0);
+        typeDefinitions.put("namespace", 0);
         typeDefinitions.put("short", 0);
         typeDefinitions.put("string", 0);
         typeDefinitions.put("void", 0);
@@ -31,22 +32,22 @@ public class Keywords {
         tokens.put("break", 0);
         tokens.put("case", 0);
         tokens.put("catch", 0);
-        tokens.put("class", 0);
         tokens.put("continue", 0);
         tokens.put("cin", 0);
         tokens.put("cout", 0);
+        tokens.put("const", 0);
         tokens.put("default", 0);
         tokens.put("delete", 0);
         tokens.put("do", 0);
         tokens.put("else", 0);
         tokens.put("enum", 0);
+        tokens.put("endl", 0);
         tokens.put("false", 0);
         tokens.put("final", 0);
         tokens.put("for", 0);
         tokens.put("friend", 0);
         tokens.put("if", 0);
         tokens.put("inline", 0);
-        tokens.put("namespace", 0);
         tokens.put("new", 0);
         tokens.put("nullptr", 0);
         tokens.put("operator", 0);
@@ -80,11 +81,7 @@ public class Keywords {
     }
 
     public static boolean isKeyword(String token) {
-        return keywords.contains(token);
-    }
-
-    public static boolean isNamespace(String token) {
-        return token.equals("namespace");
+        return keywords.contains(token.replace(";", ""));
     }
 
     public static boolean isTypeDefinition(String token) {

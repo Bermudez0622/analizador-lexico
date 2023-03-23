@@ -15,6 +15,7 @@ public class Main {
     public static void main(String[] args) {
 
         File file = null;
+        String line = null;
 
         for(String arg : args) {
             file = new File(arg);
@@ -27,7 +28,7 @@ public class Main {
                 );
 
                 while(reader.hasNextLine()) {
-                    String line = reader.nextLine();
+                    line = reader.nextLine();
             
                     Extractor.verifyLine(line);
                 }
@@ -38,7 +39,9 @@ public class Main {
                     file.getName()
                 );
             } catch(Exception e) {
-                log.log(Level.SEVERE, "ERROR EN LA LECTURA DEL ARCHIVO [{0}]", e.getMessage());
+                log.log(Level.SEVERE, "ERROR EN LA LECTURA DEL ARCHIVO", e);
+                log.log(Level.SEVERE, "En la linea: {0}", line);
+
             }
 
             log.log(

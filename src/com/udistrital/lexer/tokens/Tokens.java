@@ -12,7 +12,7 @@ public class Tokens {
     public static Map<String, Set<Entry<String, Integer>>> getAllTokens() {
         
         return Map.of(
-            "Identifiers", Developer.getIdentifiers().stream().filter(x -> x.getValue() > 0).collect(Collectors.toSet()),
+            "Identifiers", Developer.getDeveloperTokens().stream().filter(x -> x.getValue() > 0).collect(Collectors.toSet()),
             "Includes", Imports.getIncludes().stream().filter(x -> x.getValue() > 0).collect(Collectors.toSet()),
             "Keywords", Keywords.getKeywords().stream().filter(x -> x.getValue() > 0).collect(Collectors.toSet()),
             "Operators", Operators.getOperators().stream().filter(x -> x.getValue() > 0).collect(Collectors.toSet()),

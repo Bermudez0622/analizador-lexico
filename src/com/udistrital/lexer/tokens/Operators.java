@@ -5,6 +5,9 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import com.udistrital.lexer.stacks.Delimiters;
+
 import java.util.Set;
 
 public class Operators {
@@ -27,6 +30,7 @@ public class Operators {
         arithmetics.put("%", 0);
         arithmetics.put(">>", 0);
         arithmetics.put("<<", 0);
+        arithmetics.put("=", 0);
 
         relational.put("==", 0);
         relational.put(">", 0);
@@ -87,19 +91,19 @@ public class Operators {
 
     public static boolean isOpenDelimiter(String token) {
         int index = Arrays.asList(delimiters.keySet().toArray()).indexOf(token);
-        return 0 <= index && index <= 7 && index % 2 == 0;
+        return (0 <= index && index <= 5 && index % 2 == 0) || (token.equals("\"") || token.equals("'")) && !Delimiters.containsQuote();
     }
 
     public static boolean isCloseDelimiter(String token) {
         int index = Arrays.asList(delimiters.keySet().toArray()).indexOf(token);
-        return 0 <= index && index <= 7 && index % 2 != 0;
+        return (0 <= index && index <= 5 && index % 2 != 0) || (token.equals("\"") || token.equals("'")) && Delimiters.containsQuote() && correspond(token, Delimiters.getLasElement());
     }
 
     public static boolean correspond(String openToken, String closeToken) {
         int openIndex = Arrays.asList(delimiters.keySet().toArray()).indexOf(openToken);
         int closeIndex = Arrays.asList(delimiters.keySet().toArray()).indexOf(closeToken);
 
-        return closeIndex - openIndex == 1;
+        return (openIndex != -1) && ((closeIndex - openIndex == 1) || (openToken.equals(closeToken) && closeToken.equals("\"")) || (openToken.equals(closeToken) && closeToken.equals("'")));
     }
 
     public static Set<Entry<String, Integer>> getOperators() {
