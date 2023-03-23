@@ -1,20 +1,20 @@
 package com.udistrital.lexer.tokens;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 public class Operators {
 
     private Operators() {}
 
-    protected static final Map<String, Integer> arithmetics = new HashMap<>();
-    protected static final Map<String, Integer> relational = new HashMap<>();
-    protected static final Map<String, Integer> logical = new HashMap<>();
-    protected static final Map<String, Integer> special = new HashMap<>();
+    protected static final Map<String, Integer> arithmetics = new LinkedHashMap<>();
+    protected static final Map<String, Integer> relational = new LinkedHashMap<>();
+    protected static final Map<String, Integer> logical = new LinkedHashMap<>();
+    protected static final Map<String, Integer> special = new LinkedHashMap<>();
     protected static final Map<String, Integer> delimiters = new LinkedHashMap<>();
 
     protected static final Set<String> operators = new LinkedHashSet<>();
@@ -25,6 +25,8 @@ public class Operators {
         arithmetics.put("*", 0);
         arithmetics.put("/", 0);
         arithmetics.put("%", 0);
+        arithmetics.put(">>", 0);
+        arithmetics.put("<<", 0);
 
         relational.put("==", 0);
         relational.put(">", 0);
@@ -45,8 +47,6 @@ public class Operators {
         delimiters.put("}", 0);
         delimiters.put("[", 0);
         delimiters.put("]", 0);
-        delimiters.put("<", 0);
-        delimiters.put(">", 0);
         delimiters.put("\"", 0);
         delimiters.put("'", 0);
 
@@ -58,23 +58,11 @@ public class Operators {
     }
 
     public static boolean containsOperator(String line) {
-
-        for(String character : line.split("")) {
-            if(operators.contains(character)) {
-                return true;
-            }
-        }
-
-        return false;
-
+        return operators.stream().anyMatch(line::contains);
     }
 
     public static boolean isOperator(String token) {
-        return arithmetics.containsKey(token) ||
-                relational.containsKey(token) ||
-                   logical.containsKey(token) ||
-                   special.containsKey(token) ||
-                delimiters.containsKey(token);
+        return operators.contains(token);
     }
 
     public static boolean isArithmetic(String token) {
@@ -112,6 +100,56 @@ public class Operators {
         int closeIndex = Arrays.asList(delimiters.keySet().toArray()).indexOf(closeToken);
 
         return closeIndex - openIndex == 1;
+    }
+
+    public static Set<Entry<String, Integer>> getOperators() {
+
+        Set<Entry<String, Integer>> operatorsEntrySet = new LinkedHashSet<>();
+
+        operatorsEntrySet.addAll(arithmetics.entrySet());
+        operatorsEntrySet.addAll(relational.entrySet());
+        operatorsEntrySet.addAll(logical.entrySet());
+        operatorsEntrySet.addAll(special.entrySet());
+        operatorsEntrySet.addAll(delimiters.entrySet());
+
+        return operatorsEntrySet;
+    }
+
+    public static void add(String token) {
+        if(arithmetics.containsKey(token)) {
+            arithmetics.put(
+                token,
+                arithmetics.get(token) + 1
+            );
+        }
+
+        if(relational.containsKey(token)) {
+            relational.put(
+                token,
+                relational.get(token) + 1
+            );
+        }
+
+        if(logical.containsKey(token)) {
+            logical.put(
+                token,
+                logical.get(token) + 1
+            );
+        }
+
+        if(special.containsKey(token)) {
+            special.put(
+                token,
+                special.get(token) + 1
+            );
+        }
+
+        if(delimiters.containsKey(token)) {
+            delimiters.put(
+                token,
+                delimiters.get(token) + 1
+            );
+        }
     }
     
 }

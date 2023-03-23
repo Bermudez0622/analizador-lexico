@@ -5,7 +5,11 @@ import java.util.regex.Pattern;
 public class Reviewer {
     private Reviewer() {}
 
-    public static Pattern include = Pattern.compile("#include\\s+\\b<.+>\\b|\\b\".+\"\\b");
+    protected static String include = "<.+>|\".+\"";
+
+    public static boolean isImport(String line) {
+        return Pattern.matches(include, line);
+    }
 }
 
 
