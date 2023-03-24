@@ -46,5 +46,9 @@ public class Delimiters {
     public static String getLasElement() {
         return stack.peek();
     }
+
+    public static boolean isEmpty() {
+        return stack.isEmpty();
+    }
     
 }

@@ -1,11 +1,13 @@
 package com.udistrital.lexer;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.udistrital.lexer.reviewer.Extractor;
+import com.udistrital.lexer.stacks.Delimiters;
 import com.udistrital.lexer.tokens.Tokens;
 
 public class Main {
@@ -31,6 +33,12 @@ public class Main {
                     line = reader.nextLine();
             
                     Extractor.verifyLine(line);
+                }
+
+                if(!Delimiters.isEmpty()) {
+                    throw new IOException(
+                        String.format("No se encuentra token de cierre para %s", Delimiters.getLasElement())
+                    );
                 }
 
                 log.log(
