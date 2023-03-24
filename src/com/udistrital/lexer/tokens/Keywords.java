@@ -27,6 +27,7 @@ public class Keywords {
         typeDefinitions.put("namespace", 0);
         typeDefinitions.put("short", 0);
         typeDefinitions.put("string", 0);
+        typeDefinitions.put("struct", 0);
         typeDefinitions.put("void", 0);
 
         tokens.put("break", 0);
@@ -59,7 +60,6 @@ public class Keywords {
         tokens.put("signed", 0);
         tokens.put("sizeof", 0);
         tokens.put("static", 0);
-        tokens.put("struct", 0);
         tokens.put("template", 0);
         tokens.put("this", 0);
         tokens.put("throw", 0);

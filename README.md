@@ -10,3 +10,7 @@ javac src/com/udistrital/lexer/Main.java -cp src/ -d bin/
 ``` sh
 java -cp bin/ com.udistrital.lexer.Main test-files/algorithmcontroller.cpp test-files/main.cpp test-files/util.cpp
 ```
+
+Enlace del video: https://youtu.be/SUUWgh6mOpU
+
+Enlace repositorio: https://github.com/Bermudez0622/analizador-lexico.git
