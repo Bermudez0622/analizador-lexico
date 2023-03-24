@@ -1,5 +1,11 @@
 # analizador-lexico
 
+## Integrantes
+
+Johan Castaño - 20191020029
+
+Jesús Leiva - 20191020132
+
 # Build
 ``` sh
 javac src/com/udistrital/lexer/Main.java -cp src/ -d bin/
