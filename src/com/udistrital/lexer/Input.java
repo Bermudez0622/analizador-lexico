@@ -115,16 +115,19 @@ public class Input extends javax.swing.JFrame{
         if (evt.getSource() == jButton1) {
             String name = JOptionPane.showInputDialog("Escriba el nombre de su archivo .cpp");
 	    String entrada = jTextArea2.getText();
+
+        String fileName = "test-files/"+name+".cpp";
+
             try {
-            FileWriter writer = new FileWriter("test-files\\"+name+".cpp", true);
+            FileWriter writer = new FileWriter(fileName, true);
             writer.write(entrada + "\n");
             writer.close();
             } catch (IOException ex) {
             ex.printStackTrace();
              }
             //for(String arg : entrada){
-            file = new File("test-files\\"+name+".cpp");
-            try(Scanner reader = new Scanner("test-files\\"+name+".cpp")) {
+            file = new File(fileName);
+            try(Scanner reader = new Scanner(file)) {
                     log.log(
                     Level.INFO,
                     "Inicia: {0}",
