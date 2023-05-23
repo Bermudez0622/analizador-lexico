@@ -1,6 +1,6 @@
 grammar CPP;
 
-program : (declaration | function_definition)+;
+program : IMPORT* (declaration | function_definition)+;
 
 declaration : type_specifier declarator ';' ;
 
@@ -28,7 +28,7 @@ assignment_expression : additive_expression ('=' additive_expression)* ;
 
 additive_expression : multiplicative_expression (('+'|'-') multiplicative_expression)* ;
 
-multiplicative_expression : unary_expression ((''|'/'|'%') unary_expression) ;
+multiplicative_expression : unary_expression (('*'|'/'|'%') unary_expression)* ;
 
 unary_expression : ('+'|'-'|'!')? primary_expression ;
 
@@ -39,3 +39,5 @@ primary_expression : ID | INT ;
 ID : [a-zA-Z_][a-zA-Z_0-9]* ;
 
 INT : [0-9]+ ;
+
+IMPORT : '#include' ('<' | '"') ID ('>' | '"');
